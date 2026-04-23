@@ -1,0 +1,383 @@
+@baseUrl = http://localhost:6666/api
+@email = sarvarjonamriyev@gmail.com
+@phone = +998901234567
+@password = Qwerty123!
+@newPassword = NewPass123!
+@firstName = Ali
+@lastName = Valiyev
+
+# Paste after signinVerify/signupVerify response:
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzk0YzJkYzEtYTdhNi00YjBmLTg1MGItM2JkNWFlZjU3MGRjIiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlhdCI6MTc3MjUyNzA5NywiZXhwIjoxNzc0MjU1MDk3fQ.E6ByCLwON1rrW3y8jyde_NU7nGgd6hvuBqxfD5RpukM
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzk0YzJkYzEtYTdhNi00YjBmLTg1MGItM2JkNWFlZjU3MGRjIiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpYXQiOjE3NzI1MjcwOTcsImV4cCI6MTc3NDI1NTA5N30.RDNWHPFguS7Ac0xFV-LrBk3zaP7Uq3fikMWPl76wr9o
+
+###
+# =============================
+# 0) Health check
+# =============================
+GET {{baseUrl}}/
+Accept: application/json
+
+###
+# =============================
+# 1) SIGNUP - init (creates user + sends OTP)
+# NOTE: phone_number is REQUIRED in your service signature.
+# =============================
+POST {{baseUrl}}/v2/auth/signup/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "phone_number": "{{phone}}",
+  "password": "{{password}}",
+  "first_name": "{{firstName}}",
+  "last_name": "{{lastName}}"
+}
+
+###
+# =============================
+# 2) SIGNUP - resend OTP
+# =============================
+POST {{baseUrl}}/v2/auth/signup/resend
+Content-Type: application/json
+
+{
+  "email": "{{email}}"
+}
+
+###
+# =============================
+# 3) SIGNUP - verify OTP (paste real OTP)
+# =============================
+POST {{baseUrl}}/v2/auth/signup/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "115179"
+}
+
+###
+# =============================
+# 4) SIGNUP - verify with WRONG OTP (should fail)
+# =============================
+POST {{baseUrl}}/v2/auth/signup/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "000000"
+}
+
+###
+# =============================
+# 5) SIGNUP init again with same email (should fail: already registered)
+# =============================
+POST {{baseUrl}}/v2/auth/signup/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "phone_number": "+998901111111",
+  "password": "{{password}}",
+  "first_name": "{{firstName}}",
+  "last_name": "{{lastName}}"
+}
+
+###
+# =============================
+# 6) SIGNIN - init (checks password + sends OTP)
+# =============================
+POST {{baseUrl}}/v2/auth/signin/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+###
+# =============================
+# 7) SIGNIN - resend OTP
+# =============================
+POST {{baseUrl}}/v2/auth/signin/resend
+Content-Type: application/json
+
+{
+  "email": "{{email}}"
+}
+
+###
+# =============================
+# 8) SIGNIN - verify OTP (paste real OTP)
+# After success, copy tokens:
+#  - accessToken  -> @accessToken
+#  - refreshToken -> @refreshToken
+# =============================
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "469991"
+}
+
+###
+# =============================
+# 9) SIGNIN init with WRONG password (should fail)
+# =============================
+POST {{baseUrl}}/v2/auth/signin/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "WrongPassword123!"
+}
+
+###
+# =============================
+# 10) REFRESH TOKEN (Happy path)
+# Requires: route + controller for POST /v2/auth/refreshToken
+# Body expects: { "refreshToken": "..." }
+# =============================
+POST {{baseUrl}}/v2/auth/refreshToken
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###
+# =============================
+# 11) REFRESH TOKEN - tampered token (should fail)
+# =============================
+POST {{baseUrl}}/v2/auth/refreshToken
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}x"
+}
+
+###
+# =============================
+# 12) LOGOUT (single session)
+# Requires: route + controller for POST /v2/auth/logout
+# =============================
+POST {{baseUrl}}/v2/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###
+# After logout, refresh should fail
+POST {{baseUrl}}/v2/auth/refreshToken
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###
+# =============================
+# 13) LOGOUT ALL sessions
+# Requires: route + controller for POST /v2/auth/logoutAll
+# NOTE: Better to take user_id from access token (protect middleware),
+# but your service signature takes user_id directly.
+# =============================
+POST {{baseUrl}}/v2/auth/logoutAll
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "user_id": "PASTE_USER_ID_HERE"
+}
+
+###
+# =============================
+# 14) FORGOT PASSWORD - init (privacy friendly)
+# =============================
+POST {{baseUrl}}/v2/auth/password/forgot/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}"
+}
+
+###
+# =============================
+# 15) FORGOT PASSWORD - resend (same behavior as init)
+# Requires: route + controller for POST /v2/auth/password/forgot/resend
+# =============================
+POST {{baseUrl}}/v2/auth/password/forgot/resend
+Content-Type: application/json
+
+{
+  "email": "{{email}}"
+}
+
+###
+# =============================
+# 16) FORGOT PASSWORD - verify OTP (optional step)
+# =============================
+POST {{baseUrl}}/v2/auth/password/forgot/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "678759"
+}
+
+###
+# =============================
+# 17) FORGOT PASSWORD - confirm (updates password + logs out all sessions)
+# =============================
+POST {{baseUrl}}/v2/auth/password/forgot/confirm
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "678759",
+  "newPassword": "{{newPassword}}"
+}
+
+###
+# =============================
+# 18) Sign in with OLD password (should fail)
+# =============================
+POST {{baseUrl}}/v2/auth/signin/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+###
+# =============================
+# 19) Sign in with NEW password (should succeed)
+# =============================
+POST {{baseUrl}}/v2/auth/signin/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{newPassword}}"
+}
+
+###
+# Verify sign-in OTP (paste OTP)
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "749926"
+}
+
+###
+# =============================
+# 20) Forgot password - NON-EXISTING email (privacy friendly)
+# Should still return OK message.
+# =============================
+POST {{baseUrl}}/v2/auth/password/forgot/init
+Content-Type: application/json
+
+{
+  "email": "no.such.user@example.com"
+}
+
+###
+# =============================
+# 21) OTP expired (manual)
+# - Run signin/init
+# - Wait > OTP_TTL_MINUTES
+# - verify with OTP
+# Expected: "OTP is not valid or expired."
+# =============================
+POST {{baseUrl}}/v2/auth/signin/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{newPassword}}"
+}
+
+###
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "PASTE_OLD_OTP_HERE"
+}
+
+###
+# =============================
+# 22) OTP attempts exceeded (manual)
+# - Run signin/init
+# - Call verify with wrong otp until max_attempts
+# - Then try correct otp -> should fail
+# =============================
+POST {{baseUrl}}/v2/auth/signin/init
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{newPassword}}"
+}
+
+###
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "000000"
+}
+
+###
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "000000"
+}
+
+###
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "000000"
+}
+
+###
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "000000"
+}
+
+###
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "000000"
+}
+
+###
+# Try correct OTP now (should fail if max_attempts reached / DAO blocks)
+POST {{baseUrl}}/v2/auth/signin/verify
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "otp": "PASTE_CORRECT_OTP_HERE"
+}

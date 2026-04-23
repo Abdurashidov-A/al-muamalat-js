@@ -1,0 +1,262 @@
+.verify-page {
+  min-height: 100vh;
+  padding: 14px 16px 20px;
+}
+
+.verify-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f3f4f6;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.verify-form-panel {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 48px 40px;
+}
+
+.verify-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.verify-brand-logo {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+.verify-brand-text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #009688;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.verify-heading-wrap {
+  margin-top: 100px;
+}
+
+.verify-title {
+  margin: 0;
+  color: #171717;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 76px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.verify-subtitle {
+  margin: 16px auto 0;
+  max-width: 450px;
+  color: #6c6c6c;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.verify-form {
+  margin-top: 56px;
+  display: flex;
+  width: 454px;
+  max-width: 100%;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.verify-field {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #9d9d9d;
+  border-radius: 8px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  padding: 0 18px 0 24px;
+}
+
+.verify-field input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font-size: 22px;
+  line-height: 1;
+  outline: none;
+}
+
+.verify-field input::placeholder {
+  color: #8d8d8d;
+}
+
+.verify-field-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.verify-field-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.verify-submit {
+  margin-top: 20px;
+  width: 100%;
+  height: 66px;
+  border: 0;
+  border-radius: 8px;
+  background: #009688;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.verify-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.verify-meta {
+  margin: 20px 0 0;
+  color: #747474;
+  font-size: 18px;
+}
+
+.verify-resend {
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #009688;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.verify-back-link {
+  margin-top: 26px;
+  color: #009688;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.verify-hero-panel {
+  margin: 16px;
+  border-radius: 40px;
+  background: #05a396;
+  position: relative;
+  padding: 80px 40px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.verify-ask-card {
+  position: absolute;
+  left: -180px;
+  top: 78px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.verify-ask-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #ffffff;
+}
+
+.verify-ask-copy span {
+  color: #8f8f8f;
+  font-size: 20px;
+}
+
+.verify-ask-copy strong {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 700;
+  color: #009688;
+}
+
+.verify-ask-avatar {
+  width: 74px;
+  height: 74px;
+  object-fit: cover;
+}
+
+.verify-illustration {
+  width: min(100%, 520px);
+  height: auto;
+}
+
+.verify-hero-title {
+  margin: 40px 0 0;
+  text-align: center;
+  color: #ffffff;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+@media (max-width: 1120px) {
+  .verify-card {
+    grid-template-columns: 1fr;
+  }
+
+  .verify-hero-panel {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .verify-ask-card {
+    left: 24px;
+    top: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .verify-form-panel {
+    padding: 28px 20px 36px;
+  }
+
+  .verify-heading-wrap {
+    margin-top: 48px;
+  }
+
+  .verify-title {
+    font-size: 48px;
+  }
+
+  .verify-subtitle {
+    font-size: 18px;
+  }
+
+  .verify-field input {
+    font-size: 18px;
+  }
+
+  .verify-hero-title {
+    font-size: 34px;
+  }
+}

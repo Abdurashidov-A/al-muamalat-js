@@ -1,0 +1,94 @@
+import tick from "../../assets/tick.svg";
+import "./Programs.css";
+
+const learnItems = [
+  "Gain a comprehensive understanding of Islamic finance principles and ethics.",
+  "Build a portfolio with 10+ real-world projects in Islamic financial services.",
+  "Learn to develop and manage Sharia-compliant financial products.",
+  "Master key concepts in Islamic banking, investment, and wealth management.",
+  "Understand the fundamentals of risk management in Islamic finance.",
+  "Develop skills to work as an Islamic finance consultant.",
+];
+
+const whyItems = [
+  "Lifetime access",
+  "Video lessons",
+  "Tests",
+  "Projects",
+  "Downloadable resources",
+  "Access via mobile device",
+];
+
+const courseInfoItems = [
+  {
+    title: "Videodarslar",
+    text: "Lessons are posted on the platform in the form of videos, which can be viewed anytime and anywhere. Video lessons are updated.",
+  },
+  {
+    title: "Tasks",
+    text: "Test tasks are given at the end of the module. Only students who successfully pass the test will be able to access the lessons in the next module.",
+  },
+];
+
+const Programs = () => {
+  return (
+    <section className="programs">
+      <header className="programs-heading">
+        <h1>International educational programs</h1>
+        <p>
+          Al Muamalat Education's international study programs offer an in-depth
+          learning experience at leading Islamic financial institutions around
+          the world.
+        </p>
+      </header>
+
+      <div className="programs-content">
+        <article className="programs-column programs-column-learn">
+          <h2>What you&apos;ll learn</h2>
+          <ul className="learn-list">
+            {learnItems.map((item) => (
+              <li key={item}>
+                <span className="learn-list-icon" aria-hidden>
+                  <img src={tick} alt="" />
+                </span>
+                <p>{item}</p>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article className="programs-column programs-column-why">
+          <h2>
+            Why should you study at
+            <br />
+            &quot;AL-MUAMALAT&quot;?
+          </h2>
+          <ul className="why-list">
+            {whyItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+
+      <section
+        className="brief-course-info"
+        aria-label="Brief information about the course"
+      >
+        <h2>Brief information about the course</h2>
+        <div className="brief-course-grid">
+          {courseInfoItems.map((item) => (
+            <article className="brief-course-card" key={item.title}>
+              <h3>
+                {item.title} <span aria-hidden>▼</span>
+              </h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+};
+
+export default Programs;
