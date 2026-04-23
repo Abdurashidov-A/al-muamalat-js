@@ -5,6 +5,7 @@ import Register from "../components/Register/Register";
 import Courses from "../pages/Courses/components/Profile/Profile";
 import Programs from "../pages/Programs/Programs";
 import React from "react";
+import Verify from "../components/Verify/Verify";
 
 const LazyHomepage = React.lazy(
   () => import("../components/Homepage/Homepage"),
@@ -35,6 +36,7 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/courses" element={<Courses />} />
       <Route path="/programs" element={<Programs />} />
+      <Route path="/verify" element={<Verify />} />
       {/* <Route path="/"/> */}
     </Routes>
   );

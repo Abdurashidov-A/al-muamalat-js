@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import illustration from "../../assets/illustrationimage.png";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/register.svg";
 import smsIcon from "../../assets/sms.svg";
 import "./Verify.css";
 
@@ -35,79 +33,53 @@ const Verify = () => {
 
   return (
     <div className="verify-page">
-      <div className="verify-card">
-        <section className="verify-form-panel" aria-label="OTP verification form">
-          <a className="verify-brand" href="/" aria-label="AL MUAMALAT home">
-            <img className="verify-brand-logo" src={logo} alt="AL MUAMALAT logo" />
-            <span className="verify-brand-text">AL MUAMALAT</span>
-          </a>
+      <section className="verify-box" aria-label="OTP verification form">
+        <a className="verify-brand" href="/" aria-label="AL MUAMALAT home">
+          <img className="verify-brand-logo" src={logo} alt="AL MUAMALAT logo" />
+          <span className="verify-brand-text">AL MUAMALAT</span>
+        </a>
 
-          <div className="verify-heading-wrap">
-            <h1 className="verify-title">Verify OTP</h1>
-            <p className="verify-subtitle">
-              Enter the 6-digit code sent to your email.
-            </p>
-          </div>
+        <h1 className="verify-title">Verify OTP</h1>
+        <p className="verify-subtitle">Enter the 6-digit code sent to your email.</p>
 
-          <form onSubmit={handleSubmit} className="verify-form">
-            <label className="verify-field" htmlFor="otp-code">
-              <input
-                id="otp-code"
-                name="otp"
-                type="text"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                placeholder="Enter 6-digit code"
-                value={otpCode}
-                onChange={handleOtpChange}
-                aria-label="OTP code"
-              />
-              <span className="verify-field-icon" aria-hidden>
-                <img src={smsIcon} alt="" />
-              </span>
-            </label>
+        <form onSubmit={handleSubmit} className="verify-form">
+          <label className="verify-field" htmlFor="otp-code">
+            <input
+              id="otp-code"
+              name="otp"
+              type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              placeholder="Enter 6-digit code"
+              value={otpCode}
+              onChange={handleOtpChange}
+              aria-label="OTP code"
+            />
+            <span className="verify-field-icon" aria-hidden>
+              <img src={smsIcon} alt="" />
+            </span>
+          </label>
 
-            <button
-              className="verify-submit"
-              type="submit"
-              disabled={otpCode.length !== OTP_LENGTH || isSubmitting}
-            >
-              {isSubmitting ? "Sending..." : "Send code"}
-            </button>
-          </form>
+          <button
+            className="verify-submit"
+            type="submit"
+            disabled={otpCode.length !== OTP_LENGTH || isSubmitting}
+          >
+            {isSubmitting ? "Sending..." : "Send code"}
+          </button>
+        </form>
 
-          <p className="verify-meta">
-            Didn’t receive the code?
-            <button className="verify-resend" type="button">
-              Resend
-            </button>
-          </p>
+        <p className="verify-meta">
+          Didn’t receive the code?
+          <button className="verify-resend" type="button">
+            Resend
+          </button>
+        </p>
 
-          <Link className="verify-back-link" to="/login">
-            Back to login
-          </Link>
-        </section>
-
-        <section className="verify-hero-panel" aria-label="Welcome panel">
-          <div className="verify-ask-card">
-            <div className="verify-ask-copy">
-              <span>Questions?</span>
-              <strong>Ask Diyor</strong>
-            </div>
-            <img className="verify-ask-avatar" src={avatar} alt="Diyor" />
-          </div>
-
-          <img
-            className="verify-illustration"
-            src={illustration}
-            alt="Verification illustration"
-          />
-
-          <h2 className="verify-hero-title">
-            <span className="nowrap">Secure access to Al Muamalat</span>
-          </h2>
-        </section>
-      </div>
+        <Link className="verify-back-link" to="/login">
+          Back to login
+        </Link>
+      </section>
     </div>
   );
 };
