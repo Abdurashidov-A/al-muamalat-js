@@ -9,6 +9,7 @@ const defaultProvider = {
   login: () => Promise.resolve(),
   register: () => Promise.resolve(),
   logout: () => Promise.resolve(),
+  handleVerify: () => Promise.resolve(),
 };
 
 const AuthContext = createContext(defaultProvider);
@@ -53,11 +54,26 @@ const AuthProvider = ({ children }) => {
       });
   };
 
+  const handleVerify = (params) => {
+    request
+      .post("v2/auth/signin/verify", params)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("finally");
+      });
+  };
+
   const values = {
     user,
     loading,
     login: handleLogin,
     register: handleRegister,
+    verify: handleVerify,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

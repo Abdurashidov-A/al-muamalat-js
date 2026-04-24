@@ -3,48 +3,60 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import smsIcon from "../../assets/sms.svg";
 import "./Verify.css";
+import { useAuth } from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
 
 const OTP_LENGTH = 6;
 
 const Verify = () => {
+  const auth = useAuth();
+
+  const {
+    handleSubmit,
+    register,
+    // formstate: { errors },
+  } = useForm({ defaultValues: { email: "", otp: "" } });
+
   const [otpCode, setOtpCode] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailData, setEmailData] = useState("");
 
   const handleOtpChange = (event) => {
-    const numbersOnly = event.target.value.replace(/\D/g, "").slice(0, OTP_LENGTH);
+    const numbersOnly = event.target.value
+      .replace(/\D/g, "")
+      .slice(0, OTP_LENGTH);
     setOtpCode(numbersOnly);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (data) => {
+    const submitData = {
+      email: emailData,
+      ...data,
+    };
 
-    if (otpCode.length !== OTP_LENGTH) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    // TODO: Replace with real verification request.
-    setTimeout(() => {
-      setIsSubmitting(false);
-      console.log("OTP sent:", otpCode);
-    }, 400);
+    auth.handleVerify(submitData);
   };
 
   return (
     <div className="verify-page">
       <section className="verify-box" aria-label="OTP verification form">
         <a className="verify-brand" href="/" aria-label="AL MUAMALAT home">
-          <img className="verify-brand-logo" src={logo} alt="AL MUAMALAT logo" />
+          <img
+            className="verify-brand-logo"
+            src={logo}
+            alt="AL MUAMALAT logo"
+          />
           <span className="verify-brand-text">AL MUAMALAT</span>
         </a>
 
         <h1 className="verify-title">Verify OTP</h1>
-        <p className="verify-subtitle">Enter the 6-digit code sent to your email.</p>
+        <p className="verify-subtitle">
+          Enter the 6-digit code sent to your email.
+        </p>
 
-        <form onSubmit={handleSubmit} className="verify-form">
+        <form onSubmit={handleSubmit(onSubmit)} className="verify-form">
           <label className="verify-field" htmlFor="otp-code">
             <input
+              {...register("otp")}
               id="otp-code"
               name="otp"
               type="text"
@@ -63,9 +75,9 @@ const Verify = () => {
           <button
             className="verify-submit"
             type="submit"
-            disabled={otpCode.length !== OTP_LENGTH || isSubmitting}
+            disabled={otpCode.length !== OTP_LENGTH}
           >
-            {isSubmitting ? "Sending..." : "Send code"}
+            {"Send code"}
           </button>
         </form>
 
