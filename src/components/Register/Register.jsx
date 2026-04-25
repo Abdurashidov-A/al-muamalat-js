@@ -4,13 +4,14 @@ import avatar from "../../assets/register.svg";
 import userIcon from "../../assets/user.svg";
 import smsIcon from "../../assets/sms.svg";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const Register = () => {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -22,16 +23,21 @@ const Register = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { first_name, last_name, email, phone_number, password } = data;
     console.log("data", data);
-
-    auth.register(
-      { first_name, last_name, email, phone_number, password },
-      () => {
-        toast.error("Xatolik yuz berdi!");
-      },
-    );
+    try {
+      await auth.register({
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        password,
+      });
+      navigate("/verify");
+    } catch {
+      toast.error("error");
+    }
   };
   return (
     <div className="register-page">

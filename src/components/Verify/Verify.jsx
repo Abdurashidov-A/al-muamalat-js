@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import smsIcon from "../../assets/sms.svg";
 import "./Verify.css";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const OTP_LENGTH = 6;
 
 const Verify = () => {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -26,12 +28,17 @@ const Verify = () => {
     setOtpCode(numbersOnly);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const submitData = {
       data,
     };
 
-    auth.verify(submitData);
+    try {
+      await auth.verify(submitData);
+      navigate("/");
+    } catch {
+      toast.error("error");
+    }
   };
 
   return (
