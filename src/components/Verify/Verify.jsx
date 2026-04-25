@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import smsIcon from "../../assets/sms.svg";
 import "./Verify.css";
@@ -12,6 +12,8 @@ const OTP_LENGTH = 6;
 const Verify = () => {
   const auth = useAuth();
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const email = state?.email || localStorage.getItem("verifyEmail");
 
   const {
     handleSubmit,
@@ -28,17 +30,17 @@ const Verify = () => {
     setOtpCode(numbersOnly);
   };
 
-  const onSubmit = async (data) => {
-    const submitData = {
-      data,
-    };
-
+  const onSubmit = async () => {
     try {
-      await auth.verify(submitData);
+      await auth.verify({ email, otp: otpCode });
       navigate("/");
     } catch {
       toast.error("error");
     }
+  };
+
+  const handleResend = () => {
+    auth.resend({ email });
   };
 
   return (
@@ -88,7 +90,11 @@ const Verify = () => {
 
         <p className="verify-meta">
           Didn’t receive the code?
-          <button className="verify-resend" type="button">
+          <button
+            onClick={handleResend}
+            className="verify-resend"
+            type="button"
+          >
             Resend
           </button>
         </p>

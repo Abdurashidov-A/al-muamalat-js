@@ -10,6 +10,7 @@ const defaultProvider = {
   register: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   handleVerify: () => Promise.resolve(),
+  handleResend: () => Promise.resolve(),
 };
 
 const AuthContext = createContext(defaultProvider);
@@ -59,16 +60,28 @@ const AuthProvider = ({ children }) => {
       });
   };
 
-  const handleVerify = (params) => {
+  const handleVerify = ({ email, otp }) => {
     request
-      .post("/v2/auth/signin/verify", { ...params })
+      .post("/v2/auth/signup/verify", { email, otp })
       .then((response) => {
+        localStorage.removeItem("verifyEmail");
         console.log(response.data);
-        setEmailData(response.data.email);
       })
       .catch((error) => {
         console.log(error);
       })
+      .finally(() => {
+        console.log("finally");
+      });
+  };
+
+  const handleResend = () => {
+    request
+      .post("/v2/auth/signup/resend")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error))
       .finally(() => {
         console.log("finally");
       });
@@ -80,6 +93,7 @@ const AuthProvider = ({ children }) => {
     login: handleLogin,
     register: handleRegister,
     verify: handleVerify,
+    resend: handleResend,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

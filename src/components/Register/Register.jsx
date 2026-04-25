@@ -34,7 +34,8 @@ const Register = () => {
         phone_number,
         password,
       });
-      navigate("/verify");
+      localStorage.setItem("verifyEmail", email);
+      navigate("/verify", { state: { email } });
     } catch {
       toast.error("error");
     }
