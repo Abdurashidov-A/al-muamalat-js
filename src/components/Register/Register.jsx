@@ -1,14 +1,38 @@
 import illustration from "../../assets/illustrationimage.png";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/register.svg";
-import uzFlag from "../../assets/uz.svg";
 import userIcon from "../../assets/user.svg";
 import smsIcon from "../../assets/sms.svg";
-import arrowDownIcon from "../../assets/arrow-down.svg";
 import "./Register.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const auth = useAuth();
+
+  const { handleSubmit, register } = useForm({
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    const { first_name, last_name, email, phone_number, password } = data;
+    console.log("data", data);
+
+    auth.register(
+      { first_name, last_name, email, phone_number, password },
+      () => {
+        toast.error("Xatolik yuz berdi!");
+      },
+    );
+  };
   return (
     <div className="register-page">
       <div className="register-card">
@@ -32,11 +56,17 @@ const Register = () => {
             </p>
           </div>
 
-          <form className="register-form" action="#" method="post">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="register-form"
+            action="#"
+            method="post"
+          >
             <label className="register-field" htmlFor="register-name">
               <input
+                {...register("first_name")}
                 id="register-name"
-                name="name"
+                name="first_name"
                 type="text"
                 placeholder="Enter your name"
               />
@@ -45,8 +75,22 @@ const Register = () => {
               </span>
             </label>
 
+            <label className="register-field" htmlFor="register-last-name">
+              <input
+                {...register("last_name")}
+                id="register-last-name"
+                name="last_name"
+                type="text"
+                placeholder="Enter your last name"
+              />
+              <span className="register-field-icon" aria-hidden>
+                <img src={userIcon} alt="" />
+              </span>
+            </label>
+
             <label className="register-field" htmlFor="register-email">
               <input
+                {...register("email")}
                 id="register-email"
                 name="email"
                 type="email"
@@ -56,28 +100,29 @@ const Register = () => {
                 <img src={smsIcon} alt="" />
               </span>
             </label>
-            <label
-              className="register-field register-field-country"
-              htmlFor="register-country"
-            >
-              <img
-                className="register-field-flag"
-                src={uzFlag}
-                alt=""
-                aria-hidden
-              />
+
+            <label className="register-field" htmlFor="register-phone-number">
               <input
-                id="register-country"
-                name="country"
-                type="text"
-                placeholder="Uzbekistan"
+                {...register("phone_number")}
+                id="register-phone-number"
+                name="phone_number"
+                type="tel"
+                placeholder="Enter your phone number"
               />
-              <span
-                className="register-field-icon register-field-icon-arrow"
-                aria-hidden
-              >
-                <img src={arrowDownIcon} alt="" />
+              <span className="register-field-icon" aria-hidden>
+                <img src={smsIcon} alt="" />
               </span>
+            </label>
+
+            <label className="register-field" htmlFor="register-password">
+              <input
+                {...register("password")}
+                id="register-password"
+                name="password"
+                type="password"
+                placeholder="Create password"
+              />
+              <span className="register-field-icon" aria-hidden></span>
             </label>
             <button className="register-submit" type="submit">
               Log in

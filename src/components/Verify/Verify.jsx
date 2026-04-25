@@ -18,7 +18,6 @@ const Verify = () => {
   } = useForm({ defaultValues: { email: "", otp: "" } });
 
   const [otpCode, setOtpCode] = useState("");
-  const [emailData, setEmailData] = useState("");
 
   const handleOtpChange = (event) => {
     const numbersOnly = event.target.value
@@ -29,11 +28,10 @@ const Verify = () => {
 
   const onSubmit = (data) => {
     const submitData = {
-      email: emailData,
-      ...data,
+      data,
     };
 
-    auth.handleVerify(submitData);
+    auth.verify(submitData);
   };
 
   return (

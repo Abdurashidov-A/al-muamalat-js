@@ -17,6 +17,7 @@ const AuthContext = createContext(defaultProvider);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(defaultProvider.user);
   const [loading, setLoading] = useState(defaultProvider.loading);
+  const [emailData, setEmailData] = useState("");
 
   const handleLogin = (params) => {
     setLoading(true);
@@ -27,6 +28,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem("userToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         setUser(response.data.user);
+        setEmailData(response.data?.email);
       })
       .catch((error) => {
         console.log(error);
@@ -56,7 +58,7 @@ const AuthProvider = ({ children }) => {
 
   const handleVerify = (params) => {
     request
-      .post("v2/auth/signin/verify", params)
+      .post("/v2/auth/signin/verify", { ...params, emailData })
       .then((response) => {
         console.log(response.data);
       })

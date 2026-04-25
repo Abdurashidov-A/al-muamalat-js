@@ -41,12 +41,6 @@ const Login = () => {
 
           <div className="register-heading-wrap">
             <h1 className="register-title">Get started</h1>
-            {/* <p className="register-subtitle">
-              Already have an account?
-              <a className="register-signin-link" href="#">
-                Sign in
-              </a>
-            </p> */}
           </div>
 
           <form
