@@ -1,11 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-// import Homepage from "../components/Homepage/Homepage";
-// import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
-import Courses from "../pages/Courses/components/Profile/Profile";
 import Programs from "../pages/Programs/Programs";
 import React from "react";
 import Verify from "../components/Verify/Verify";
+import Profile from "../pages/Profile/Profile";
 
 const LazyHomepage = React.lazy(
   () => import("../components/Homepage/Homepage"),
@@ -34,10 +32,9 @@ const AppRouter = () => {
       />
       {/* <Route path="/login" element={<Login />} /> */}
       <Route path="/register" element={<Register />} />
-      <Route path="/courses" element={<Courses />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/programs" element={<Programs />} />
       <Route path="/verify" element={<Verify />} />
-      {/* <Route path="/"/> */}
     </Routes>
   );
 };

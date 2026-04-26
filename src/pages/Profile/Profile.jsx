@@ -1,7 +1,7 @@
 import "./Profile.css";
-import { Form } from "react-router-dom";
-import avatar from "../../../../assets/register.svg";
-import Courses from "../../Courses";
+import user from "../../assets/user.svg";
+import Courses from "../Courses/Courses";
+import { Form, Tab, Tabs } from "react-bootstrap";
 
 const Profile = () => {
   return (
@@ -11,11 +11,7 @@ const Profile = () => {
           <section className="courses-modal" aria-label="Profile form">
             <div className="courses-modal-head">
               <div className="courses-user">
-                <img
-                  className="courses-avatar"
-                  src={avatar}
-                  alt="Alexa Rawles"
-                />
+                <img className="courses-avatar" src={user} alt="Alexa Rawles" />
                 <h1>Alexa Rawles</h1>
               </div>
               <button className="courses-save-btn" type="button">
