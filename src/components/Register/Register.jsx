@@ -20,7 +20,7 @@ const Register = () => {
       email: "",
       phone_number: "",
       password: "",
-    },
+    }, 
   });
 
   const onSubmit = async (data) => {

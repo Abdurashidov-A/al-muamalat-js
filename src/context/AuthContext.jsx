@@ -10,6 +10,7 @@ const defaultProvider = {
   register: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   handleVerify: () => Promise.resolve(),
+  handleVerifySignin: () => Promise.resolve(),
   handleResend: () => Promise.resolve(),
 };
 
@@ -19,6 +20,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(defaultProvider.user);
   const [loading, setLoading] = useState(defaultProvider.loading);
   const [email, setEmailData] = useState("");
+
+  // abduqahhor.abdurashidov99@gmail.com
 
   const handleLogin = (params) => {
     setLoading(true);
@@ -64,7 +67,9 @@ const AuthProvider = ({ children }) => {
     request
       .post("/v2/auth/signup/verify", { email, otp })
       .then((response) => {
-        localStorage.removeItem("verifyEmail");
+        localStorage.setItem("userToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        // localStorage.removeItem("verifyEmail")
         console.log(response.data);
       })
       .catch((error) => {
@@ -74,10 +79,29 @@ const AuthProvider = ({ children }) => {
         console.log("finally");
       });
   };
-
-  const handleResend = () => {
+  const handleVerifySignin = ({ email, otp }) => {
     request
-      .post("/v2/auth/signup/resend")
+      .post("/v2/auth/signin/verify", { email, otp })
+      .then((response) => {
+        localStorage.setItem("userToken", response.data.tokens?.accessToken);
+        localStorage.setItem(
+          "refreshToken",
+          response.data.tokens?.refreshToken,
+        );
+        // localStorage.removeItem("verifyEmail")
+        console.log(response.data.tokens.accessToken);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("finally");
+      });
+  };
+
+  const handleResend = (email) => {
+    request
+      .post("/v2/auth/signin/resend", email)
       .then((response) => {
         console.log(response.data);
       })
@@ -93,6 +117,7 @@ const AuthProvider = ({ children }) => {
     login: handleLogin,
     register: handleRegister,
     verify: handleVerify,
+    verifySignin: handleVerifySignin,
     resend: handleResend,
   };
 

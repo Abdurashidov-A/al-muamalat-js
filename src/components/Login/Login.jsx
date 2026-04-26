@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import illustration from "../../assets/illustrationimage.png";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/register.svg";
@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -21,9 +22,15 @@ const Login = () => {
     const { email, password } = data;
     console.log("data", data);
 
-    auth.login({ email, password }, () => {
-      toast.error("Xatolik yuz berdi!");
-    });
+    try {
+      auth.login({ email, password }, () => {
+        toast.error("Xatolik yuz berdi!");
+      });
+      localStorage.setItem("verifyEmail", email);
+      navigate("/verify");
+    } catch {
+      toast.error("error");
+    }
   };
 
   return (

@@ -32,8 +32,8 @@ const Verify = () => {
 
   const onSubmit = async () => {
     try {
-      await auth.verify({ email, otp: otpCode });
-      navigate("/");
+      await auth.verifySignin({ email, otp: otpCode });
+      navigate("/profile");
     } catch {
       toast.error("error");
     }
