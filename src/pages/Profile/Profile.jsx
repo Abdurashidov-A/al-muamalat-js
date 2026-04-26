@@ -2,8 +2,16 @@ import "./Profile.css";
 import user from "../../assets/user.svg";
 import Courses from "../Courses/Courses";
 import { Form, Tab, Tabs } from "react-bootstrap";
+import { useQuery } from "@tanstack/react-query";
+import { request } from "../../services/request";
 
 const Profile = () => {
+  const { data } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () => request.get("user/me").then((res) => res.data),
+  });
+
+  console.log("data", data);
   return (
     <main className="courses-page">
       <Tabs defaultActiveKey="profile" className="courses-tabs" mountOnEnter>

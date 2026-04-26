@@ -28,12 +28,12 @@ request.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem("refreshToken");
         const response = await axios.post(
-          "https://api.al-muamalat.uz/api/auth/refresh",
+          "https://api.al-muamalat.uz/api/v2/auth/refreshToken",
           {
             refreshToken: refreshToken,
           },
         );
-        const { accessToken } = response.data;
+        const { accessToken } = response.data.tokens;
         localStorage.setItem("accessToken", accessToken);
         return axios(error.config);
       } catch {

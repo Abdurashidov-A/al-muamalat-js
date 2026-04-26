@@ -29,11 +29,11 @@ const AuthProvider = ({ children }) => {
       .post("/v2/auth/signin/init", params)
       .then((response) => {
         console.log(response.data);
-        localStorage.setItem("accessToken", response.data.tokens?.accessToken);
-        localStorage.setItem(
-          "refreshToken",
-          response.data.tokens?.refreshToken,
-        );
+        // localStorage.setItem("accessToken", response.data.tokens?.accessToken);
+        // localStorage.setItem(
+        //   "refreshToken",
+        //   response.data.tokens?.refreshToken,
+        // );
         setUser(response.data.user);
         setEmailData(response.data?.email);
       })
@@ -51,11 +51,11 @@ const AuthProvider = ({ children }) => {
       .post("/v2/auth/signup/init", params)
       .then((response) => {
         console.log(response.data);
-        localStorage.setItem("accessToken", response.data.tokens?.accessToken);
-        localStorage.setItem(
-          "refreshToken",
-          response.data.tokens?.refreshToken,
-        );
+        // localStorage.setItem("accessToken", response.data.tokens?.accessToken);
+        // localStorage.setItem(
+        //   "refreshToken",
+        //   response.data.tokens?.refreshToken,
+        // );
         setUser(response.data.user);
         setEmailData(response.data?.email ?? params.email);
         return response;
@@ -73,11 +73,11 @@ const AuthProvider = ({ children }) => {
     request
       .post("/v2/auth/signup/verify", { email, otp })
       .then((response) => {
-        localStorage.setItem("accessToken", response.data.tokens?.accessToken);
-        localStorage.setItem(
-          "refreshToken",
-          response.data.tokens?.refreshToken,
-        );
+        // localStorage.setItem("accessToken", response.data.tokens?.accessToken);
+        // localStorage.setItem(
+        //   "refreshToken",
+        //   response.data.tokens?.refreshToken,
+        // );
         // localStorage.removeItem("verifyEmail")
         console.log(response.data);
       })
@@ -98,7 +98,7 @@ const AuthProvider = ({ children }) => {
           response.data.tokens?.refreshToken,
         );
         // localStorage.removeItem("verifyEmail")
-        console.log(response.response.data.tokens?.accessToken);
+        console.log(response.data.tokens?.accessToken);
         return response;
       })
       .catch((error) => {
