@@ -10,7 +10,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("userToken");
+    const token = localStorage.getItem("accessToken");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
@@ -34,7 +34,7 @@ request.interceptors.response.use(
           },
         );
         const { accessToken } = response.data;
-        localStorage.setItem("userToken", accessToken);
+        localStorage.setItem("accessToken", accessToken);
         return axios(error.config);
       } catch {
         window.location.href = "/login";
