@@ -8,10 +8,10 @@ import { request } from "../../services/request";
 const Profile = () => {
   const { data } = useQuery({
     queryKey: ["profile"],
-    queryFn: () => request.get("user/me").then((res) => res.data),
+    queryFn: () => request.get("users/me").then((res) => res.data),
   });
 
-  console.log("data", data);
+  console.log("data", data.data);
   return (
     <main className="courses-page">
       <Tabs defaultActiveKey="profile" className="courses-tabs" mountOnEnter>
@@ -19,8 +19,12 @@ const Profile = () => {
           <section className="courses-modal" aria-label="Profile form">
             <div className="courses-modal-head">
               <div className="courses-user">
-                <img className="courses-avatar" src={user} alt="Alexa Rawles" />
-                <h1>Alexa Rawles</h1>
+                <img
+                  className="courses-avatar"
+                  src={data.data?.img ? data.data?.img : user}
+                  alt="Alexa Rawles"
+                />
+                <h1>{data.data?.full_name}</h1>
               </div>
               <button className="courses-save-btn" type="button">
                 Save
@@ -30,7 +34,7 @@ const Profile = () => {
             <Form className="courses-form">
               <div className="courses-form-grid">
                 <Form.Group className="courses-field" controlId="firstName">
-                  <Form.Label>First Name</Form.Label>
+                  <Form.Label>Full Name</Form.Label>
                   <Form.Control
                     className="courses-input"
                     type="text"
@@ -39,7 +43,7 @@ const Profile = () => {
                 </Form.Group>
 
                 <Form.Group className="courses-field" controlId="lastName">
-                  <Form.Label>Last Name</Form.Label>
+                  <Form.Label>Phone Number</Form.Label>
                   <Form.Control
                     className="courses-input"
                     type="text"
@@ -48,7 +52,7 @@ const Profile = () => {
                 </Form.Group>
 
                 <Form.Group className="courses-field" controlId="address">
-                  <Form.Label>Address</Form.Label>
+                  <Form.Label>Password</Form.Label>
                   <Form.Control
                     className="courses-input"
                     type="text"
@@ -57,7 +61,7 @@ const Profile = () => {
                 </Form.Group>
 
                 <Form.Group className="courses-field" controlId="birthday">
-                  <Form.Label>Birthday</Form.Label>
+                  <Form.Label>Gender</Form.Label>
                   <Form.Control
                     className="courses-input"
                     type="text"

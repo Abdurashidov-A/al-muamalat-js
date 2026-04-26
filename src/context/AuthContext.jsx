@@ -92,13 +92,16 @@ const AuthProvider = ({ children }) => {
     return request
       .post("/v2/auth/signin/verify", { email, otp })
       .then((response) => {
-        localStorage.setItem("accessToken", response.data.tokens?.accessToken);
+        localStorage.setItem(
+          "accessToken",
+          response.data.data.tokens?.accessToken,
+        );
         localStorage.setItem(
           "refreshToken",
-          response.data.tokens?.refreshToken,
+          response.data.data.tokens?.refreshToken,
         );
         // localStorage.removeItem("verifyEmail")
-        console.log(response.data.tokens?.accessToken);
+        console.log(response.data.data.tokens?.accessToken);
         return response;
       })
       .catch((error) => {
