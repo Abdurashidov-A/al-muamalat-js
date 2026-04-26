@@ -2,16 +2,35 @@ import "./Profile.css";
 import user from "../../assets/user.svg";
 import Courses from "../Courses/Courses";
 import { Form, Tab, Tabs } from "react-bootstrap";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { request } from "../../services/request";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const Profile = () => {
-  const { data } = useQuery({
+  const { data: userData } = useQuery({
     queryKey: ["profile"],
     queryFn: () => request.get("users/me").then((res) => res.data),
   });
 
-  console.log("data", data.data);
+  const { register, handleSubmit } = useForm();
+
+  const { mutate } = useMutation({
+    mutationKey: ["mutate-profile"],
+    mutationFn: () => request.put(`/users/${userData?.data?.user_id}`),
+    onSuccess: () => {
+      toast.success("User updated successfully");
+    },
+    onError: () => {
+      toast.error("Failed");
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log("data", data);
+    mutate(data);
+  };
+
   return (
     <main className="courses-page">
       <Tabs defaultActiveKey="profile" className="courses-tabs" mountOnEnter>
@@ -21,53 +40,65 @@ const Profile = () => {
               <div className="courses-user">
                 <img
                   className="courses-avatar"
-                  src={data.data?.img ? data.data?.img : user}
+                  src={userData.data?.img ? userData.data?.img : user}
                   alt="Alexa Rawles"
                 />
-                <h1>{data.data?.full_name}</h1>
+                <h1>{userData.data?.full_name}</h1>
               </div>
-              <button className="courses-save-btn" type="button">
+              <button
+                className="courses-save-btn"
+                type="submit"
+                form="profile-form"
+              >
                 Save
               </button>
             </div>
 
-            <Form className="courses-form">
+            <Form className="profile-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="courses-form-grid">
                 <Form.Group className="courses-field" controlId="firstName">
                   <Form.Label>Full Name</Form.Label>
                   <Form.Control
+                    {...register("full_name")}
+                    name="full_name"
                     className="courses-input"
                     type="text"
-                    placeholder="Your First Name"
+                    placeholder="Your Full Name"
                   />
                 </Form.Group>
 
                 <Form.Group className="courses-field" controlId="lastName">
                   <Form.Label>Phone Number</Form.Label>
                   <Form.Control
+                    {...register("phone_number")}
+                    name="phone_number"
                     className="courses-input"
                     type="text"
-                    placeholder="Your Last Name"
+                    placeholder="Your Phone Number"
                   />
                 </Form.Group>
 
                 <Form.Group className="courses-field" controlId="address">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
+                    {...register("password")}
+                    name="password"
                     className="courses-input"
                     type="text"
-                    placeholder="Enter Your Address"
+                    placeholder="Enter Password"
                   />
                 </Form.Group>
 
-                <Form.Group className="courses-field" controlId="birthday">
+                {/* <Form.Group className="courses-field" controlId="birthday">
                   <Form.Label>Gender</Form.Label>
                   <Form.Control
+                    {...register("gender")}
+                    name="gender"
                     className="courses-input"
                     type="text"
-                    placeholder="Enter Your Birthday"
+                    placeholder="Enter Gender"
                   />
-                </Form.Group>
+                </Form.Group> */}
               </div>
             </Form>
           </section>
