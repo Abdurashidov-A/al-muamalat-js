@@ -9,6 +9,7 @@ import star5 from "../../assets/star 5.svg";
 import Header from "../Header/Header";
 import OurServices from "./components/OurServices/OurServices";
 import "./Homepage.css";
+import Footer from "../Footer/Footer";
 
 const Homepage = () => {
   return (
@@ -137,6 +138,7 @@ const Homepage = () => {
       </div>
 
       <OurServices />
+      <Footer />
     </div>
   );
 };
