@@ -10,14 +10,17 @@ import { useForm } from "react-hook-form";
 const Profile = () => {
   const { data: userData } = useQuery({
     queryKey: ["profile"],
-    queryFn: () => request.get("users/me").then((res) => res.data),
+    queryFn: () => request.get("users/me").then((res) => res?.data),
   });
+
+  const profile = userData?.data;
 
   const { register, handleSubmit } = useForm();
 
   const { mutate } = useMutation({
     mutationKey: ["mutate-profile"],
-    mutationFn: () => request.put(`/users/${userData?.data?.user_id}`),
+    mutationFn: (payload) =>
+      request.put(`/users/${userData?.data?.user_id}`, payload),
     onSuccess: () => {
       toast.success("User updated successfully");
     },
@@ -40,10 +43,10 @@ const Profile = () => {
               <div className="courses-user">
                 <img
                   className="courses-avatar"
-                  src={userData.data?.img ? userData.data?.img : user}
+                  src={profile?.img || user}
                   alt="Alexa Rawles"
                 />
-                <h1>{userData.data?.full_name}</h1>
+                <h1>{profile?.full_name || "User"}</h1>
               </div>
               <button
                 className="courses-save-btn"
@@ -54,7 +57,11 @@ const Profile = () => {
               </button>
             </div>
 
-            <Form className="profile-form" onSubmit={handleSubmit(onSubmit)}>
+            <Form
+              id="profile-form"
+              className="profile-form"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="courses-form-grid">
                 <Form.Group className="courses-field" controlId="firstName">
                   <Form.Label>Full Name</Form.Label>
@@ -88,17 +95,6 @@ const Profile = () => {
                     placeholder="Enter Password"
                   />
                 </Form.Group>
-
-                {/* <Form.Group className="courses-field" controlId="birthday">
-                  <Form.Label>Gender</Form.Label>
-                  <Form.Control
-                    {...register("gender")}
-                    name="gender"
-                    className="courses-input"
-                    type="text"
-                    placeholder="Enter Gender"
-                  />
-                </Form.Group> */}
               </div>
             </Form>
           </section>
