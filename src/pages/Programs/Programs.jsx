@@ -1,5 +1,6 @@
 import tick from "../../assets/tick.svg";
 import PopularCourses from "./_components/PopularCourses/PopularCourses";
+import OurServicesPrograms from "./_components/OurServices/OurServicesPrograms";
 import "./Programs.css";
 
 const learnItems = [
@@ -90,6 +91,7 @@ const Programs = () => {
       </section>
 
       <PopularCourses />
+      <OurServicesPrograms />
     </section>
   );
 };

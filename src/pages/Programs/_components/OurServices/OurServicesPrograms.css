@@ -1,0 +1,381 @@
+.our-services-programs {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding-bottom: 70px;
+}
+
+.our-services-programs-heading {
+  width: min(560px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.our-services-programs-heading h2 {
+  margin: 0;
+  color: #111318;
+  font-size: 46px;
+  line-height: 1.06;
+  font-weight: 700;
+}
+
+.our-services-programs-heading p {
+  margin: 14px auto 0;
+  color: #5f646d;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 500;
+  max-width: 540px;
+}
+
+.our-services-programs-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.our-services-program-card {
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.our-services-program-card-image-wrap {
+  position: relative;
+}
+
+.our-services-program-card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.our-services-program-card-badge {
+  position: absolute;
+  left: 14px;
+  bottom: -13px;
+  min-height: 32px;
+  border-radius: 18px;
+  background: #d4f0eb;
+  color: #202932;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 9px;
+}
+
+.our-services-program-card-users {
+  display: inline-flex;
+  align-items: center;
+}
+
+.our-services-program-card-users img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #d4f0eb;
+  object-fit: cover;
+}
+
+.our-services-program-card-users img + img {
+  margin-left: -8px;
+}
+
+.our-services-program-card-body {
+  padding: 24px 16px 14px;
+}
+
+.our-services-program-card-date {
+  margin: 0;
+  color: #98a1aa;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.our-services-program-card h3 {
+  margin: 12px 0 0;
+  color: #00a291;
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.our-services-program-card-description {
+  margin: 10px 0 0;
+  color: #74808a;
+  font-size: 16px;
+  line-height: 1.35;
+  min-height: 108px;
+}
+
+.our-services-program-card-footer {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.our-services-program-card-price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.our-services-program-card-price strong {
+  color: #ff4d00;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.our-services-program-card-price span {
+  color: #80878f;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.our-services-program-card-footer button {
+  min-width: 130px;
+  height: 42px;
+  border: 0;
+  border-radius: 6px;
+  background: #00a291;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0 14px;
+}
+
+.our-services-programs-bottom {
+  margin-top: 74px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.our-services-programs-workshops {
+  background: #efe1ca;
+  padding: 36px 40px 30px;
+  min-height: 290px;
+  display: flex;
+  flex-direction: column;
+}
+
+.our-services-programs-workshops h3 {
+  margin: 0;
+  color: #ef9300;
+  font-size: 44px;
+  line-height: 1.12;
+  font-weight: 700;
+  max-width: 560px;
+}
+
+.our-services-programs-workshops p {
+  margin: 20px 0 0;
+  color: #ef9300;
+  font-size: 30px;
+  line-height: 1.3;
+  max-width: 620px;
+}
+
+.our-services-programs-dots {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.our-services-programs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.our-services-programs-dot.active {
+  width: 26px;
+  border-radius: 20px;
+  background: #00a291;
+}
+
+.our-services-programs-consultation {
+  background: #f7f7f7;
+  padding: 30px 28px;
+}
+
+.our-services-programs-consultation h3 {
+  margin: 0;
+  color: #161b23;
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.our-services-programs-consultation p {
+  margin: 10px 0 0;
+  color: #404753;
+  font-size: 13px;
+  line-height: 1.45;
+  max-width: 350px;
+}
+
+.our-services-programs-form {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.our-services-programs-form input[type="text"],
+.our-services-programs-form input[type="tel"] {
+  width: 100%;
+  height: 42px;
+  border-radius: 5px;
+  border: 1px solid #c9ced6;
+  background: #ffffff;
+  color: #1e2630;
+  font-size: 15px;
+  outline: none;
+  padding: 0 10px;
+}
+
+.our-services-programs-phone {
+  position: relative;
+}
+
+.our-services-programs-phone input[type="tel"] {
+  padding-left: 96px;
+}
+
+.our-services-programs-flag {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4d545e;
+}
+
+.our-services-programs-flag img {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+}
+
+.our-services-programs-flag small {
+  font-size: 14px;
+}
+
+.our-services-programs-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #3a4048;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.our-services-programs-agree input {
+  margin-top: 2px;
+}
+
+.our-services-programs-form button {
+  width: 100%;
+  height: 44px;
+  border: 0;
+  border-radius: 5px;
+  background: #00a291;
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+  .our-services-programs-heading h2 {
+    font-size: clamp(32px, 5.8vw, 46px);
+  }
+
+  .our-services-programs-heading p {
+    font-size: clamp(16px, 2.2vw, 19px);
+  }
+
+  .our-services-programs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .our-services-program-card h3 {
+    font-size: clamp(27px, 4.8vw, 34px);
+  }
+
+  .our-services-program-card-price strong {
+    font-size: clamp(28px, 4.2vw, 38px);
+  }
+
+  .our-services-program-card-price span {
+    font-size: clamp(18px, 2.6vw, 24px);
+  }
+
+  .our-services-programs-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .our-services-programs-workshops h3 {
+    font-size: clamp(30px, 5.8vw, 44px);
+  }
+
+  .our-services-programs-workshops p {
+    font-size: clamp(18px, 3.2vw, 30px);
+  }
+}
+
+@media (max-width: 760px) {
+  .our-services-programs {
+    padding-bottom: 40px;
+  }
+
+  .our-services-programs-grid {
+    margin-top: 22px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .our-services-program-card-body {
+    padding: 24px 14px 14px;
+  }
+
+  .our-services-program-card-description {
+    min-height: 0;
+    font-size: 15px;
+  }
+
+  .our-services-program-card-footer {
+    flex-wrap: wrap;
+  }
+
+  .our-services-program-card-footer button {
+    width: 100%;
+  }
+
+  .our-services-programs-workshops,
+  .our-services-programs-consultation {
+    padding: 24px 18px;
+  }
+
+  .our-services-programs-consultation h3 {
+    font-size: clamp(30px, 7.5vw, 38px);
+  }
+}
