@@ -1,4 +1,5 @@
 import tick from "../../assets/tick.svg";
+import PopularCourses from "./_components/PopularCourses/PopularCourses";
 import "./Programs.css";
 
 const learnItems = [
@@ -52,7 +53,7 @@ const Programs = () => {
                   <img src={tick} alt="" />
                 </span>
                 <p>{item}</p>
-              </li>
+              </li> 
             ))}
           </ul>
         </article>
@@ -87,6 +88,8 @@ const Programs = () => {
           ))}
         </div>
       </section>
+
+      <PopularCourses />
     </section>
   );
 };

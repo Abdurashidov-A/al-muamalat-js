@@ -1,0 +1,358 @@
+.popular-courses {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 30px 0 56px;
+  color: #25252a;
+}
+
+.popular-courses-header {
+  width: min(560px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.popular-courses-header h2 {
+  margin: 0;
+  color: #101217;
+  font-size: 46px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.popular-courses-header p {
+  margin: 14px auto 0;
+  max-width: 520px;
+  color: #555d66;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.popular-courses-slider {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.popular-courses-nav {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #07a291;
+  color: #ffffff;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.popular-courses-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.popular-course-card {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.popular-course-media {
+  margin: 12px;
+  height: 190px;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popular-course-media-peach {
+  background: #f6b9a8;
+}
+
+.popular-course-media-lilac {
+  background: #d3b8f0;
+}
+
+.popular-course-media-violet {
+  background: #b59bf4;
+}
+
+.popular-course-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 10px;
+  background: #f3eef9;
+  color: #464c59;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+
+.popular-course-media img {
+  width: min(95%, 174px);
+  height: auto;
+  object-fit: contain;
+}
+
+.popular-course-body {
+  padding: 0 14px 16px;
+}
+
+.popular-course-body h3 {
+  margin: 0;
+  color: #2d3137;
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.popular-course-rating {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666f79;
+  font-size: 20px;
+}
+
+.popular-course-stars {
+  color: #f6b657;
+  font-size: 22px;
+}
+
+.popular-course-stars-muted {
+  color: #d5d7dd;
+}
+
+.popular-course-footer {
+  min-height: 64px;
+  border-top: 1px solid #ebedf1;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popular-course-footer strong {
+  color: #202329;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.popular-course-footer button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #7be9dc;
+  color: #0d8f81;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.popular-courses-dots {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.popular-courses-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c8cfd5;
+}
+
+.popular-courses-dot-active {
+  background: #00a392;
+}
+
+.popular-courses-services {
+  margin-top: 54px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.popular-courses-services-left,
+.popular-courses-services-right {
+  padding: 56px 52px;
+}
+
+.popular-courses-services-left {
+  background: #06a393;
+  color: #ffffff;
+}
+
+.popular-courses-services-left h3,
+.popular-courses-services-right h3 {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.popular-courses-services-left ul,
+.popular-courses-services-right ul {
+  margin: 30px 0 0;
+  padding: 0;
+}
+
+.popular-courses-services-left li {
+  list-style: none;
+  position: relative;
+  padding-left: 28px;
+  margin-top: 26px;
+}
+
+.popular-courses-services-left li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.popular-courses-services-left h4 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.popular-courses-services-left p {
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.48;
+  font-weight: 400;
+  opacity: 0.97;
+}
+
+.popular-courses-services-right h3 {
+  color: #101217;
+}
+
+.popular-courses-services-right ul {
+  margin-top: 34px;
+  padding-left: 24px;
+}
+
+.popular-courses-services-right li {
+  color: #16191f;
+  font-size: 18px;
+  line-height: 1.35;
+  margin-top: 14px;
+}
+
+.popular-courses-services-right li::marker {
+  color: #00a392;
+}
+
+.popular-courses-services-right button {
+  margin-top: 40px;
+  width: 202px;
+  height: 52px;
+  border: 0;
+  border-radius: 6px;
+  background: #06a393;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@media (max-width: 1050px) {
+  .popular-courses-header h2 {
+    font-size: clamp(32px, 5.6vw, 46px);
+  }
+
+  .popular-courses-header p {
+    font-size: clamp(16px, 2.2vw, 19px);
+  }
+
+  .popular-courses-slider {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .popular-courses-nav {
+    display: none;
+  }
+
+  .popular-courses-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .popular-courses-services {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .popular-courses {
+    padding: 20px 0 40px;
+  }
+
+  .popular-courses-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .popular-course-body h3 {
+    font-size: 22px;
+  }
+
+  .popular-course-rating {
+    font-size: 16px;
+  }
+
+  .popular-course-stars {
+    font-size: 18px;
+  }
+
+  .popular-course-footer strong {
+    font-size: 28px;
+  }
+
+  .popular-courses-services-left,
+  .popular-courses-services-right {
+    padding: 34px 24px;
+  }
+
+  .popular-courses-services-left h3,
+  .popular-courses-services-right h3 {
+    font-size: clamp(30px, 7.6vw, 40px);
+  }
+
+  .popular-courses-services-left h4 {
+    font-size: 24px;
+  }
+
+  .popular-courses-services-left p,
+  .popular-courses-services-right li {
+    font-size: 16px;
+  }
+}
