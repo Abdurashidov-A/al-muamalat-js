@@ -7,7 +7,7 @@ import { request } from "../../services/request";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-const Profile = () => {
+const Profile = () => { 
   const { data: userData } = useQuery({
     queryKey: ["profile"],
     queryFn: () => request.get("users/me").then((res) => res?.data),

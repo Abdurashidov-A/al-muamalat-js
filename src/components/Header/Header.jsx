@@ -4,8 +4,17 @@ import uk from "../../assets/uk.svg";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
+import { useQuery } from "@tanstack/react-query";
+import { request } from "../../services/request";
 
 const Header = () => {
+  const { data: courseList } = useQuery({
+    queryKey: ["course-list"],
+    queryFn: () => request.get("/courses/main").then((res) => res?.data),
+  });
+
+  console.log("courseList", courseList);
+
   return (
     <header className="header-shell">
       <div className="header-top">
@@ -39,10 +48,11 @@ const Header = () => {
               </span>
             </Dropdown.Toggle>
             <Dropdown.Menu className="header-programs-menu">
-              <Dropdown.Item href="#">Islamic Finance Basics</Dropdown.Item>
-              <Dropdown.Item href="#">Muamalat Contracts</Dropdown.Item>
-              <Dropdown.Item href="#">Ethics & Compliance</Dropdown.Item>
-              <Dropdown.Item href="#">Advanced Programs</Dropdown.Item>
+              {courseList?.data?.map((course) => (
+                <Dropdown.Item key={course.course_id} href="#">
+                  {course.name_uz} {/* или course.name_en */}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
           <a className="header-link" href="#">
