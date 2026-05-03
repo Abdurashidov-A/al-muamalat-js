@@ -33,6 +33,7 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/programs" element={<Programs />} />
+      <Route path="/programs/:courseId" element={<Programs />} />
       <Route path="/verify" element={<Verify />} />
     </Routes>
   );

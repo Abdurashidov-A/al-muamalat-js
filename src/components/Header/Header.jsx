@@ -2,7 +2,7 @@ import logo from "../../assets/logo.svg";
 import down from "../../assets/down.svg";
 import uk from "../../assets/uk.svg";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "../../services/request";
@@ -12,6 +12,10 @@ const Header = () => {
     queryKey: ["course-list"],
     queryFn: () => request.get("/courses/main").then((res) => res?.data),
   });
+
+  const { courseId } = useParams();
+
+  console.log("courseId", courseId);
 
   console.log("courseList", courseList);
 
@@ -49,7 +53,11 @@ const Header = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu className="header-programs-menu">
               {courseList?.data?.map((course) => (
-                <Dropdown.Item key={course.course_id} href="#">
+                <Dropdown.Item
+                  key={course.course_id}
+                  as={Link}
+                  to={`/programs/${course.course_id}`}
+                >
                   {course.name_uz} {/* или course.name_en */}
                 </Dropdown.Item>
               ))}

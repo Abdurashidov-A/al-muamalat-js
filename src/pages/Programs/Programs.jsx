@@ -2,6 +2,9 @@ import tick from "../../assets/tick.svg";
 import PopularCourses from "./_components/PopularCourses/PopularCourses";
 import OurServicesPrograms from "./_components/OurServices/OurServicesPrograms";
 import "./Programs.css";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { request } from "../../services/request";
 
 const learnItems = [
   "Gain a comprehensive understanding of Islamic finance principles and ethics.",
@@ -33,14 +36,34 @@ const courseInfoItems = [
 ];
 
 const Programs = () => {
+  const { courseId } = useParams();
+  const { data: courseList } = useQuery({
+    queryKey: ["course-list"],
+    queryFn: () => request.get("/courses/main").then((res) => res?.data),
+  });
+
+  const selectedCourse = courseList?.data?.find(
+    (course) => course.course_id === courseId,
+  );
+
+  console.log("courseId", courseId);
   return (
     <section className="programs">
       <header className="programs-heading">
-        <h1>International educational programs</h1>
+        <h1>{selectedCourse.name_uz}</h1>
         <p>
-          Al Muamalat Education's international study programs offer an in-depth
-          learning experience at leading Islamic financial institutions around
-          the world.
+          {selectedCourse.description_uz ? (
+            <div
+              className="text-base text-gray-600"
+              dangerouslySetInnerHTML={{
+                __html: selectedCourse?.description_uz
+                  ?.replace(/\\n/g, "")
+                  ?.replace(/\\"/g, '"'),
+              }}
+            />
+          ) : (
+            ""
+          )}
         </p>
       </header>
 
@@ -54,7 +77,7 @@ const Programs = () => {
                   <img src={tick} alt="" />
                 </span>
                 <p>{item}</p>
-              </li> 
+              </li>
             ))}
           </ul>
         </article>
