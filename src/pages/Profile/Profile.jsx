@@ -17,7 +17,7 @@ const Profile = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const { mutate } = useMutation({
+  const { mutate } = useMutation({ 
     mutationKey: ["mutate-profile"],
     mutationFn: (payload) =>
       request.put(`/users/${userData?.data?.user_id}`, payload),

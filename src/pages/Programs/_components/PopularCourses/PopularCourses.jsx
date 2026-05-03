@@ -1,7 +1,11 @@
+import { useForm } from "react-hook-form";
 import course1 from "../../../../assets/course1.svg";
 import course2 from "../../../../assets/course2.svg";
 import course3 from "../../../../assets/course3.svg";
 import "./PopularCourses.css";
+import { useMutation } from "@tanstack/react-query";
+import { request } from "../../../../services/request";
+import { toast } from "react-toastify";
 
 const cards = [
   {
@@ -53,6 +57,22 @@ const paymentItems = [
 ];
 
 const PopularCourses = () => {
+  const { handleSubmit } = useForm();
+
+  const { mutate } = useMutation({
+    mutationKey: ["payment"],
+    mutationFn: (payload) => request.post(`courses/user`, payload),
+    onSuccess: () => {
+      toast.succes("Success");
+    },
+    onError: () => {
+      toast.error("Error");
+    },
+  });
+
+  const onSubmit = (data) => {
+    mutate(data);
+  };
   return (
     <section className="popular-courses">
       <header className="popular-courses-header">
@@ -64,13 +84,20 @@ const PopularCourses = () => {
       </header>
 
       <div className="popular-courses-slider">
-        <button type="button" className="popular-courses-nav" aria-label="Previous course">
+        <button
+          type="button"
+          className="popular-courses-nav"
+          aria-label="Previous course"
+        >
           &#8249;
         </button>
 
         <div className="popular-courses-cards">
           {cards.map((card, index) => (
-            <article className="popular-course-card" key={`${card.category}-${index}`}>
+            <article
+              className="popular-course-card"
+              key={`${card.category}-${index}`}
+            >
               <div className={`popular-course-media ${card.tone}`}>
                 <span className="popular-course-tag">{card.category}</span>
                 <img src={card.image} alt={card.category} />
@@ -80,7 +107,8 @@ const PopularCourses = () => {
                 <h3>{card.title}</h3>
                 <div className="popular-course-rating">
                   <span className="popular-course-stars" aria-hidden>
-                    ★ ★ ★ ★ <span className="popular-course-stars-muted">★</span>
+                    ★ ★ ★ ★{" "}
+                    <span className="popular-course-stars-muted">★</span>
                   </span>
                   <span>({card.reviews})</span>
                 </div>
@@ -96,7 +124,11 @@ const PopularCourses = () => {
           ))}
         </div>
 
-        <button type="button" className="popular-courses-nav" aria-label="Next course">
+        <button
+          type="button"
+          className="popular-courses-nav"
+          aria-label="Next course"
+        >
           &#8250;
         </button>
       </div>
@@ -129,7 +161,9 @@ const PopularCourses = () => {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <button type="button">Purchase Now</button>
+          <button type="submit" onClick={() => handleSubmit(onSubmit)}>
+            Purchase Now
+          </button>
         </article>
       </section>
     </section>
