@@ -42,11 +42,18 @@ const Programs = () => {
     queryFn: () => request.get("/courses/main").then((res) => res?.data),
   });
 
+  const { data: userData } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () => request.get("users/me").then((res) => res?.data),
+  });
+
+  const userId = userData.data?.user_id;
+  console.log("userId", userId);
+
   const selectedCourse = courseList?.data?.find(
     (course) => course.course_id === courseId,
   );
 
-  console.log("courseId", courseId);
   return (
     <section className="programs">
       <header className="programs-heading">
