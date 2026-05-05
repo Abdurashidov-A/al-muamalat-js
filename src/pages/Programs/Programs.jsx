@@ -47,7 +47,7 @@ const Programs = () => {
     queryFn: () => request.get("users/me").then((res) => res?.data),
   });
 
-  const userId = userData.data?.user_id;
+  const userId = userData?.data?.user_id;
   console.log("userId", userId);
 
   const selectedCourse = courseList?.data?.find(
@@ -57,9 +57,9 @@ const Programs = () => {
   return (
     <section className="programs">
       <header className="programs-heading">
-        <h1>{selectedCourse.name_uz}</h1>
+        <h1>{selectedCourse?.name_uz}</h1>
         <p>
-          {selectedCourse.description_uz ? (
+          {selectedCourse?.description_uz ? (
             <div
               className="text-base text-gray-600"
               dangerouslySetInnerHTML={{
@@ -120,7 +120,7 @@ const Programs = () => {
         </div>
       </section>
 
-      <PopularCourses />
+      <PopularCourses courseId={courseId} userId={userId} />
       <OurServicesPrograms />
     </section>
   );

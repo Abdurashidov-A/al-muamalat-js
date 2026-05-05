@@ -56,7 +56,7 @@ const paymentItems = [
   "Personalized one-to-one training",
 ];
 
-const PopularCourses = () => {
+const PopularCourses = ({ userId, courseId }) => {
   const { handleSubmit } = useForm();
 
   const { mutate } = useMutation({
@@ -70,8 +70,12 @@ const PopularCourses = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    mutate(data);
+  const onSubmit = () => {
+    const submitdata = {
+      course_id: courseId,
+      user_id: userId,
+    };
+    mutate(submitdata);
   };
   return (
     <section className="popular-courses">
@@ -161,7 +165,7 @@ const PopularCourses = () => {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <button type="submit" onClick={() => handleSubmit(onSubmit)}>
+          <button type="submit" onClick={handleSubmit(onSubmit)}>
             Purchase Now
           </button>
         </article>
