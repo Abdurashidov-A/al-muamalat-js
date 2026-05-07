@@ -62,7 +62,18 @@ const PopularCourses = ({ userId, courseId }) => {
   const { mutate } = useMutation({
     mutationKey: ["payment"],
     mutationFn: (payload) => request.post(`courses/user`, payload),
-    onSuccess: () => {
+    onSuccess: (res) => {
+      request.get(`/courses/purchase/${res?.data?.data?.id}`).then((res) => {
+        const url = res.data.data.data;
+        if (url) {
+          const aTeg = document.createElement("a");
+          aTeg.href = url;
+          aTeg.target = "_blank";
+          document.body.appendChild(aTeg);
+          aTeg.click();
+          aTeg.remove();
+        }
+      });
       toast.succes("Success");
     },
     onError: () => {
